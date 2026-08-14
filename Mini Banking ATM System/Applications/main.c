@@ -2,10 +2,12 @@
 
 #include "../Libraries/ATM.h"
 #include "../Libraries/bank.h"
+#include "../Libraries/STD_TYPES.h"
 
 #define ACC_COUNT 6 
-int main()
-{
+u32 main(){
+
+
     Account accounts[ACC_COUNT] = {
         {"1001", "Moaaz Hesham", "1234", SAVINGS, 5000.0f, 0, 0}, 
         {"1002", "Youssef Mohamed",  "5678", CURRENT, 3500.0f, 0, 0}, 
@@ -14,21 +16,47 @@ int main()
         {"1005", "Mohamed Abdelrahman",  "9017", CURRENT, 4600.0f, 0, 0},
         {"1006", "Fatma Eslam",  "2026", CURRENT, 7600.0f, 0, 0}
     };
+    
     Account *accountsPointers[ACC_COUNT];
-    for (int i = 0 ; i < ACC_COUNT ; i++){
+    for (u32 i = 0 ; i < ACC_COUNT ; i++){
         accountsPointers[i] = &accounts[i] ; 
     }
 
     Account *currentAccount;
+    
+    while(1){
+
+    printf("========================================\n");
+    printf("        MINI BANKING & ATM SYSTEM       \n");
+    printf("========================================\n");
+
+    int attempts = 0 ; 
+    currentAccount = NULL ; 
+
+    while (attempts < 3 )
+    {
+
 
     currentAccount = login(accountsPointers,ACC_COUNT);
 
     if (currentAccount != NULL){
         printf("Login succesful! \n");
         printf("Welcome, %s\n",currentAccount->name);
+
+        atmMenu(currentAccount);
     }
     else{
+        attempts++;
         printf("Login failed! \n");
+        printf("Attempts remaining: %d\n", 3 - attempts);
     }
+
+    }
+
+    if (attempts == 3 && currentAccount == NULL){
+        printf("\nAccess denied. Maximum login attempts reached.\n");
+        break;
+    }
+ }
 
 }
