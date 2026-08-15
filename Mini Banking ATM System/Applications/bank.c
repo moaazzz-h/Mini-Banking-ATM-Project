@@ -2,20 +2,22 @@
 #include <string.h>
 #include <windows.h>
 #include "..//Libraries/bank.h"
+#include "..//Libraries/ATM.h"
+#include "..//Libraries/Standard_Types.h"
 
 
-Account *login(Account *list[], int count){
-   static int attempts = 0;
+Account *login(Account *list[], u32 count){
+   static u32 attempts = 0;
    printf("========================================\t\n");
    printf(" MINI BANKING & ATM SYSTEM\t\n");
    printf("========================================\t\n");
-   char accountNumber[12];
-   char pin[5];
+   u8 accountNumber[12];
+   u8 pin[5];
    printf("Please Enter The AccountNumber :");
    scanf("%s",accountNumber);
    printf("Please Enter The pin :");
    scanf("%s",pin);
-   for(int i=0;i<count;i++){
+   for(u32 i=0;i<count;i++){
     if(strcmp(accountNumber, list[i]->accountNumber) == 0 &&
             strcmp(pin, list[i]->pin) == 0){
         printf("Welcome %s \n",list[i]->name);
@@ -46,49 +48,7 @@ Account *login(Account *list[], int count){
 }
 
 
-void atmMenu(Account *account){
-    int  choose;
-    while(1){
-    printf("---------------ATM MENU---------------\n");
-    printf("\n 1.Check Balance \n 2.Deposit \n 3.Withdraw \n 4.Change PIN \n 5.Session Summary \n 6.Logout \n");
-    printf("please choose Number of Operation :");
-    if (scanf("%d", &choose) != 1) {
-            printf("\n[Error] Invalid input. Please enter a number from 1 to 6.\n");
-            while (getchar() != '\n');
-            continue;
-        }
 
-    switch (choose){
-       case CHECK_BALANCE:
-         showBalance(account);
-         break;
-       case DEPOSIT:
-         deposit(account);
-         break;
-       case WITHDRAW:
-         withdraw(account);
-         break;
-       case CHANGE_PIN:
-         if (changePin(account) == 1) {
-                return;
-            }
-         break;
-       case SESSION_SUMMARY:
-         showSummary(account);
-         break;
-       case LOGOUT:
-        printf("\nThank you for using our ATM. Goodbye, %s!\n", account->name);
-        return;
-
-       default:
-        printf("\n[Error] Invalid option! Please choose between 1 and 6.\n");
-         break;
-
-
-      }
-    }
-
-}
 void showBalance(const Account *account){
     printf("---------------ACCOUNT BALANCE---------------\n");
     printf("Name            : %s \n",account->name);
@@ -100,7 +60,7 @@ void showBalance(const Account *account){
 
 void deposit(Account *account){
     printf("---------------DEPOSIT OPERATION---------------\n");
-    float Amount;
+    f32 Amount;
     printf("please Enter The Deposit Amount :");
     if (scanf("%f", &Amount) != 1) {
         printf("[Error] Invalid input format!\n");
@@ -122,7 +82,7 @@ void deposit(Account *account){
 
 void withdraw(Account *account){
     printf("---------------withdraw OPERATION---------------\n");
-    float Amount;
+    f32 Amount;
     printf("please Enter The withdraw Amount :");
     if (scanf("%f", &Amount) != 1) {
         printf("[Error] Invalid input format!\n");
@@ -142,10 +102,10 @@ void withdraw(Account *account){
        printf("[Error] Insufficient Balance! Your current balance is %.2f EGP\n", account->balance);
 
 }
-int changePin(Account *account){
-        char pin[5];
-        char NEW_PIN[5];
-        int attempts = 0;
+u32 changePin(Account *account){
+        u8 pin[5];
+        u8 NEW_PIN[5];
+        u32 attempts = 0;
         while (attempts < MAX_ATTEMPTS) {
         printf("---------------CHANGE PIN---------------\n");
         printf("Please Enter The Old PIN (Attempt %d/%d): ", attempts + 1, MAX_ATTEMPTS);

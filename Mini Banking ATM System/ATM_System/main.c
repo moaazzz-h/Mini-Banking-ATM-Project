@@ -2,6 +2,7 @@
 
 #include "../Libraries/ATM.h"
 #include "../Libraries/bank.h"
+#include "..//Libraries/Standard_Types.h"
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
                 {"1003", "Mona Adel", "4321", SAVINGS, 7200.0f, 0, 0}
                 };
         Account *accountPointers[ACCOUNT_COUNT];
-        for (int i = 0; i < ACCOUNT_COUNT; i++) {
+        for (u32 i = 0; i < ACCOUNT_COUNT; i++) {
         accountPointers[i] = &accounts[i];
         }
 while (1) {
