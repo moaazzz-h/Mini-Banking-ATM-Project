@@ -1,10 +1,12 @@
 #ifndef BANK_H
 #define BANK_H
 
+#define ACCOUNT_COUNT 3
+#define MAX_ATTEMPTS 3
 typedef enum {
     SAVINGS,
     CURRENT
-} AccountType ;
+} AccountType;
 
 typedef struct {
     char accountNumber[12];
@@ -14,17 +16,7 @@ typedef struct {
     float balance;
     int depositCount;
     int withdrawalCount;
-} Account ; 
+} Account;
 
-
-Account *login(Account *list[], int count);
-
-void showBalance(const Account *account);
-
-void deposit(Account *account);
-
-void withdraw(Account *account);
-
-void showSummary(const Account *account);
 
 #endif
