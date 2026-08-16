@@ -18,5 +18,5 @@ typedef double              f64;      // 8 Bytes = 64 Bits
 
 typedef long double         f128;     // 16 Bytes = 128 Bits
 
-#endif // STANDARD_TYPES_H
+#endif
 

@@ -26,7 +26,6 @@ Account *login(Account *list[], u32 count){
         return list[i];
     }
    }
-
             attempts++;
 
     if (attempts < MAX_ATTEMPTS){

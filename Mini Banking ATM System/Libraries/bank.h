@@ -3,19 +3,21 @@
 
 #define ACCOUNT_COUNT 3
 #define MAX_ATTEMPTS 3
+#include "Standard_Types.h"
+
 typedef enum {
     SAVINGS,
     CURRENT
 } AccountType;
 
 typedef struct {
-    char accountNumber[12];
-    char name[40];
-    char pin[5];
+    u8 accountNumber[12];
+    u8 name[40];
+    u8 pin[5];
     AccountType type;
-    float balance;
-    int depositCount;
-    int withdrawalCount;
+    f32 balance;
+    u32 depositCount;
+    u32 withdrawalCount;
 } Account;
 
 
